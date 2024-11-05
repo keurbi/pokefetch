@@ -20,4 +20,5 @@
     height: 250px;
     object-fit: contain;
     background-color: whitesmoke;
+    border-radius: 10%;
   }
