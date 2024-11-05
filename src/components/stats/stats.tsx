@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './stats.css';
+import './Stats.css';
 import PokemonNotEntered from '../PokemonNotEntered/PokemonNotEntered';
 import PokemonView from '../PokemonView/PokemonView';
 import PokemonLoading from '../PokemonLoading/PokemonLoading';
@@ -25,6 +25,7 @@ const stats: FC<statsProps> = ({ data, status }) => {
   if (status === 2){
     return <PokemonView data={data} />
   }
+  return null;
 };
 
 export default stats;

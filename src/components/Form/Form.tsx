@@ -1,12 +1,29 @@
-import React, { FC } from 'react';
+import React, { useState } from 'react';
 import './Form.css';
 
-interface FormProps {}
+interface FormProps {
+  onSearch: (pokemonName: string) => void;
+}
 
-const form: FC<FormProps> = () => (
-  <div className="Form">
-    form Component
-  </div>
-);
+const Form: React.FC<FormProps> = ({ onSearch }) => {
+  const [inputValue, setInputValue] = useState('');
 
-export default form;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch(inputValue);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Enter Pokemon name"
+      />
+      <button type="submit">Search</button>
+    </form>
+  );
+};
+
+export default Form;

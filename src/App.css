@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: grey;
+  height: 100vh;
+  width: auto;
 }
 
 .App-logo {
