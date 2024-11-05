@@ -6,17 +6,6 @@ import Input from '../Input/Input';
 
 interface cardProps {}
 
-/* const PokemonSuggestion =({name, buttonSubmit}) => {
-  return <button onClick={()=>buttonSubmit(name)}>{name}</button>
-}
-
-const tryDitto = <PokemonSuggestion {...{name: "Ditto", buttonSubmit}}/>
-const tryVulpix = <PokemonSuggestion {...{name: "Vulpix", buttonSubmit}}/>
-const tryEctoplasma = <PokemonSuggestion {...{name: "Ectoplasma", buttonSubmit}}/> 
-
-      <span>Ideas of pokemons : {tryDitto}, {tryEctoplasma}, {tryVulpix}  </span>
-*/
-
 const Card: FC<cardProps> = () => {
 
   const [pokeFetched, setPokeFetched] = useState<number>(0);
@@ -37,6 +26,7 @@ const Card: FC<cardProps> = () => {
   });
 
   const handleSearch = async (pokemonName: string) => {
+    setPokeFetched(1); // loading
     try {
       const URL_BASE = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
       const response = await fetch(URL_BASE);
@@ -50,17 +40,19 @@ const Card: FC<cardProps> = () => {
         damage: data.stats[1].base_stat,
         url: data.sprites.front_default
       });
-      setPokeFetched(prev => prev + 1);
+
+      setTimeout(() => {
+        setPokeFetched(2);
+      }, 1000); //fetch réussi
+
     } catch (error) {
-      console.error('Pokemon not found');
+      setPokeFetched(0); // fetch raté/error
     }
   };
 
   return (
     <div className="card">
       <Form onSearch={handleSearch} />
-      {pokedata.url && <img src={pokedata.url} alt={pokedata.title} />}
-      <span>{pokedata.ability}</span>
       <Stats data={pokedata} status={pokeFetched}/>
     </div>
   );

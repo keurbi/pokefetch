@@ -25,7 +25,7 @@ const stats: FC<statsProps> = ({ data, status }) => {
   if (status === 2){
     return <PokemonView data={data} />
   }
-  return null;
+  else return null;
 };
 
 export default stats;
